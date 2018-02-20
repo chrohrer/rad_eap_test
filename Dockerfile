@@ -18,12 +18,8 @@ WORKDIR /eapol/wpa_supplicant-$WPA_SUPPLICANT_VERSION/wpa_supplicant
 RUN make eapol_test
 RUN mv eapol_test /eapol/
 
-
 WORKDIR /eapol
 COPY rad_eap_test /eapol/
 RUN rm -rf /eapol/wpa_supplicant-$WPA_SUPPLICANT_VERSION
 
-# EXPOSE 1812/udp 1813/udp 
-
-# CMD ["radiusd", "-sfxx -l stdout"]
-# CMD ["radiusd", "-X"]
+CMD tail -f /dev/null
