@@ -7,7 +7,7 @@ ARG WPA_SUPPLICANT_VERSION=2.6
 WORKDIR /eapol
 
 RUN apk update && apk upgrade && \
-    apk add --update linux-headers make openssl openssl-dev && \
+    apk add --update linux-headers make openssl openssl-dev bind-tools && \
     rm /var/cache/apk/*
 
 # ADD https://w1.fi/releases/wpa_supplicant-$WPA_SUPPLICANT_VERSION.tar.gz /tmp
@@ -16,10 +16,10 @@ COPY defconfig /eapol/wpa_supplicant-$WPA_SUPPLICANT_VERSION/wpa_supplicant/.con
 
 WORKDIR /eapol/wpa_supplicant-$WPA_SUPPLICANT_VERSION/wpa_supplicant
 RUN make eapol_test
-RUN mv eapol_test /eapol/
+RUN mv eapol_test /usr/local/bin/
 
 WORKDIR /eapol
-COPY rad_eap_test /eapol/
+COPY rad_eap_test /usr/local/bin/
 RUN rm -rf /eapol/wpa_supplicant-$WPA_SUPPLICANT_VERSION
 
 CMD tail -f /dev/null
