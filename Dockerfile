@@ -7,7 +7,7 @@ ARG WPA_SUPPLICANT_VERSION=2.6
 WORKDIR /eapol
 
 RUN apk update && apk upgrade && \
-    apk add --update linux-headers make openssl openssl-dev bind-tools && \
+    apk add --update linux-headers make openssl openssl-dev bind-tools freeradius-radclient  && \
     rm /var/cache/apk/*
 
 # ADD https://w1.fi/releases/wpa_supplicant-$WPA_SUPPLICANT_VERSION.tar.gz /tmp
