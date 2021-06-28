@@ -9,6 +9,9 @@ WORKDIR /eapol
 RUN apk update && apk upgrade && \
     apk add --update linux-headers make openssl openssl-dev bind-tools freeradius-radclient grep bash && \
     rm /var/cache/apk/*
+    
+# install correct version of xdd
+RUN akp add xdd
 
 # ADD https://w1.fi/releases/wpa_supplicant-$WPA_SUPPLICANT_VERSION.tar.gz /tmp
 RUN wget https://w1.fi/releases/wpa_supplicant-$WPA_SUPPLICANT_VERSION.tar.gz -O - | tar -xz
